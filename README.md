@@ -1,6 +1,6 @@
 # 2027 Epsom College Malaysia 겨울 디스커버리 캠프
 
-부산아이비어학원 모집 · 상담 · 예약 랜딩 페이지
+주최 꿈잡끼교육네트웍스(주) · 모집 · 상담 · 예약 랜딩 페이지
 
 - `index.html` — 예약 랜딩 페이지 (신청서는 busanivyacademy2025@gmail.com 으로 전송, FormSubmit 사용)
 - `card-news.html` / `card-news.png` — SNS 카드뉴스 (1080×1350)
