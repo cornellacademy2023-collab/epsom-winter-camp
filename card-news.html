@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>Epsom 겨울캠프 카드뉴스</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,500;1,600&family=Noto+Serif+KR:wght@700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  :root{--navy:#0c1c42;--navy-deep:#07122d;--teal:#15a38a;--teal-lt:#4fd1b5;--gold:#c9a45c;--gold-lt:#e8cf98}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#222;display:flex;justify-content:center;align-items:flex-start;min-height:100vh;
+       font-family:'Pretendard',-apple-system,'Apple SD Gothic Neo',sans-serif;word-break:keep-all}
+  .card{width:1080px;height:1350px;position:relative;overflow:hidden;color:#fff;
+        background:
+          radial-gradient(760px 560px at 92% 8%, rgba(21,163,138,.34), transparent 62%),
+          radial-gradient(620px 480px at 0% 100%, rgba(201,164,92,.20), transparent 62%),
+          linear-gradient(165deg,#0c1c42 0%,#07122d 78%);
+        padding:72px 80px 64px;display:flex;flex-direction:column}
+  .card::before{content:"";position:absolute;inset:0;opacity:.06;
+        background-image:linear-gradient(rgba(255,255,255,.7) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.7) 1px,transparent 1px);
+        background-size:72px 72px;-webkit-mask-image:radial-gradient(ellipse at 80% 20%,#000 5%,transparent 65%);mask-image:radial-gradient(ellipse at 80% 20%,#000 5%,transparent 65%)}
+  .crest-bg{position:absolute;right:-150px;top:120px;height:760px;opacity:.07}
+  .z{position:relative;z-index:1}
+
+  .top{display:flex;justify-content:space-between;align-items:center}
+  .brand{display:flex;align-items:center;gap:18px}
+  .brand img{height:78px}
+  .brand .b1{font-family:'Cormorant Garamond',serif;font-weight:600;letter-spacing:.24em;font-size:26px;line-height:1.1}
+  .brand .b2{font-family:'Cormorant Garamond',serif;letter-spacing:.4em;font-size:17px;color:var(--teal-lt);margin-top:4px}
+  .pill{background:var(--gold);color:var(--navy-deep);font-weight:800;font-size:22px;padding:12px 24px;border-radius:999px;letter-spacing:.02em}
+
+  .en{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:38px;color:var(--teal-lt);margin-top:44px;font-variant-numeric:lining-nums}
+  h1{font-family:'Noto Serif KR',serif;font-weight:900;font-size:80px;line-height:1.2;letter-spacing:-.035em;margin-top:10px}
+  h1 em{font-style:normal;background:linear-gradient(90deg,#f0dcae,#c9a45c);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{font-size:28px;color:rgba(255,255,255,.78);margin-top:22px;font-weight:500}
+  .sub b{color:#fff}
+
+  .camps{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:38px}
+  .camp{border-radius:28px;padding:30px 32px;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.14);position:relative}
+  .camp.sig{background:linear-gradient(150deg,rgba(232,207,152,.18),rgba(201,164,92,.08));border-color:rgba(232,207,152,.6)}
+  .camp .rec{position:absolute;top:-18px;right:26px;background:var(--gold);color:var(--navy-deep);font-size:19px;font-weight:800;padding:6px 16px;border-radius:999px}
+  .camp .k{font-size:21px;font-weight:700;color:var(--teal-lt)}
+  .camp.sig .k{color:var(--gold-lt)}
+  .camp .n{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:44px;line-height:1.1;margin-top:4px;font-variant-numeric:lining-nums}
+  .camp .d{font-size:23px;color:rgba(255,255,255,.75);margin-top:6px;font-weight:600}
+  .camp .p{display:flex;align-items:baseline;gap:12px;margin-top:18px;padding-top:18px;border-top:1px solid rgba(255,255,255,.14)}
+  .camp .p b{font-family:'Noto Serif KR',serif;font-weight:900;font-size:44px}
+  .camp .p b small{font-size:24px}
+  .camp .p span{font-size:20px;color:rgba(255,255,255,.55);font-weight:600}
+
+  .eb{margin-top:30px;display:flex;align-items:center;gap:30px;background:linear-gradient(120deg,#f0dcae,#c9a45c);color:var(--navy-deep);border-radius:28px;padding:26px 36px}
+  .eb .pct{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:112px;line-height:.9;font-variant-numeric:lining-nums;letter-spacing:-.02em}
+  .eb .pct small{font-size:48px}
+  .eb .t1{font-size:22px;font-weight:800;letter-spacing:.18em}
+  .eb .t2{font-size:36px;font-weight:900;margin-top:2px;letter-spacing:-.02em}
+  .eb .t3{font-size:21px;font-weight:600;margin-top:4px;opacity:.8}
+
+  .feat{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:32px;margin-bottom:28px}
+  .feat div{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;font-size:21px;font-weight:700;line-height:1.3;color:rgba(255,255,255,.9)}
+  .feat i{width:64px;height:64px;border-radius:20px;background:rgba(79,209,181,.14);display:grid;place-items:center;color:var(--teal-lt)}
+  .feat svg{width:32px;height:32px}
+
+  .foot{margin-top:auto;display:flex;justify-content:space-between;align-items:flex-end;padding-top:26px;border-top:1px solid rgba(255,255,255,.14)}
+  .foot .l{font-size:21px;color:rgba(255,255,255,.62);line-height:1.55}
+  .foot .l b{color:#fff;font-size:24px}
+  .foot .cta{background:var(--teal);color:#fff;border-radius:999px;padding:18px 32px;font-size:28px;font-weight:800;display:flex;align-items:center;gap:12px;box-shadow:0 14px 34px -12px rgba(21,163,138,.8)}
+  .foot .cta svg{width:28px;height:28px}
+</style>
+</head>
+<body>
+<div class="card" id="card">
+  <img class="crest-bg" src="assets/epsom-crest-white.svg" alt="">
+
+  <div class="top z">
+    <div class="brand">
+      <img src="assets/epsom-crest-white.svg" alt="">
+      <div><div class="b1">EPSOM COLLEGE</div><div class="b2">MALAYSIA</div></div>
+    </div>
+    <div class="pill">2027 공식 모집</div>
+  </div>
+
+  <p class="en z">Winter Discovery Camp 2027</p>
+  <h1 class="z">영국 명문 보딩스쿨에서<br><em>영어로 사는 겨울방학</em></h1>
+  <p class="sub z">말레이시아 KL · <b>만 9–14세</b> · 소수정예 숙박형 캠프</p>
+
+  <div class="camps z">
+    <div class="camp">
+      <div class="k">2주 집중 캠프</div>
+      <div class="n">Camp 1</div>
+      <div class="d">2027. 1. 10 – 1. 22</div>
+      <div class="p"><b>350<small>만 원</small></b><span>RM 10,000</span></div>
+    </div>
+    <div class="camp sig">
+      <span class="rec">인기 추천</span>
+      <div class="k">4주 시그니처 캠프</div>
+      <div class="n">Signature Camp</div>
+      <div class="d">2027. 1. 10 – 2. 3</div>
+      <div class="p"><b>700<small>만 원</small></b><span>RM 20,000</span></div>
+    </div>
+  </div>
+
+  <div class="eb z">
+    <div class="pct">15<small>%</small></div>
+    <div>
+      <div class="t1">EARLY BIRD</div>
+      <div class="t2">11월 30일까지 등록 시 학비 할인</div>
+      <div class="t3">형제자매 5% · 설명회 참여 15% (택 1)</div>
+    </div>
+  </div>
+
+  <div class="feat z">
+    <div><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg></i>수준별 맞춤<br>영어수업</div>
+    <div><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7l4 3-1.5 4.5h-5L8 10z"/><path d="M12 3v4M21 10h-5M3 10h5M9.5 14.5 7 19M14.5 14.5 17 19"/></svg></i>명문 아카데미<br>스포츠</div>
+    <div><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v6L4.5 18.5A1.7 1.7 0 0 0 6 21h12a1.7 1.7 0 0 0 1.5-2.5L14 9V3"/><path d="M7 15h10"/></svg></i>STEAM &amp;<br>창의활동</div>
+    <div><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 4l9 6.5"/><path d="M5 9.5V20h14V9.5"/><path d="M10 20v-5h4v5"/></svg></i>영국식<br>기숙사 하우스</div>
+  </div>
+
+  <div class="foot z">
+    <div class="l"><b>부산아이비어학원</b> 모집·상담·인솔<br>☎ 010-4822-3528 · 카카오톡 채널 문의</div>
+    <div class="cta">상담·예약 신청<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+  </div>
+</div>
+</body>
+</html>
