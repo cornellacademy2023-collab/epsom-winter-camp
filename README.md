@@ -2,7 +2,7 @@
 
 주최 꿈잡끼교육네트웍스(주) · 모집 · 상담 · 예약 랜딩 페이지
 
-- `index.html` — 예약 랜딩 페이지 (신청서는 busanivyacademy2025@gmail.com 으로 전송, FormSubmit 사용)
+- `index.html` — 예약 랜딩 페이지 (신청서는 rush3528@gmail.com 으로 전송, FormSubmit 사용)
 - `card-news.html` / `card-news.png` — SNS 카드뉴스 (1080×1350)
 - `assets/` — Epsom College Malaysia 로고·문장 SVG
 
