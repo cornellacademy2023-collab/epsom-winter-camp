@@ -303,7 +303,38 @@
   .thanks .acts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
   .thanks .acts .btn{height:50px;font-size:15px}
 
+  /* photo layers: show only once the image files exist in assets/photos/ */
+  .hero .photo{position:absolute;inset:0;background:url('assets/photos/hero.jpg') center/cover no-repeat;opacity:.34;mix-blend-mode:luminosity}
+  .hero .photo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,18,45,.92) 0%,rgba(7,18,45,.55) 55%,rgba(7,18,45,.35) 100%)}
+  .apply .photo{position:absolute;inset:0;background:url('assets/photos/apply.jpg') center/cover no-repeat;opacity:.16}
+
+  .gallery{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:220px;gap:14px}
+  .gallery figure{position:relative;overflow:hidden;border-radius:20px;background:var(--sand)}
+  .gallery figure:first-child{grid-column:span 2;grid-row:span 2}
+  .gallery img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+  .gallery figure:hover img{transform:scale(1.05)}
+  .gallery figcaption{position:absolute;left:0;right:0;bottom:0;padding:32px 18px 14px;color:#fff;font-weight:700;font-size:15px;
+      background:linear-gradient(transparent,rgba(7,18,45,.8))}
+  #campus[hidden]{display:none}
+
+  .family{background:#fff;border-top:1px solid var(--line);padding:56px 0}
+  .family .in{display:grid;grid-template-columns:200px 1fr;gap:32px;align-items:center}
+  .family h3{font-family:'Cormorant Garamond',serif;letter-spacing:.3em;font-size:14px;color:var(--teal);font-weight:700}
+  .family h3 + p{font-size:14px;color:var(--muted);margin-top:6px}
+  .fam-list{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .fam{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;height:150px;border:1px solid var(--line);border-radius:20px;
+       padding:18px;text-align:center;transition:border-color .2s,box-shadow .2s,transform .2s;background:#fff}
+  .fam:hover{border-color:var(--teal);box-shadow:var(--shadow);transform:translateY(-3px)}
+  .fam img{max-height:74px;width:auto;max-width:80%}
+  .fam .role{font-size:12.5px;font-weight:700;color:var(--teal);letter-spacing:.04em}
+  .fam .nm{font-family:'Noto Serif KR',serif;font-weight:900;font-size:20px;color:var(--navy);line-height:1.3}
+  .fam .nm small{display:block;font-family:'Pretendard',sans-serif;font-size:12px;font-weight:600;color:var(--muted);letter-spacing:.08em}
+
   footer{background:var(--navy-deep);color:rgba(255,255,255,.6);padding:64px 0;font-size:14px}
+  footer .credits{display:grid;grid-template-columns:auto 1fr;gap:8px 18px;font-size:15px;margin-top:6px}
+  footer .credits dt{color:var(--teal-lt);font-weight:700;white-space:nowrap}
+  footer .credits dd{color:#fff;font-weight:600}
+  footer .contact-line{margin-top:14px;font-size:14px}
   footer .in{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;align-items:flex-start}
   footer .fl img{height:96px;width:auto}
   footer .fr{line-height:1.9;max-width:560px}
@@ -334,6 +365,8 @@
     .nav .menu{display:none}
     .hero .in{grid-template-columns:1fr;gap:40px;padding:112px 20px 80px}
     .hero .crest-bg{right:-160px;height:560px;opacity:.05}
+    .gallery{grid-template-columns:1fr 1fr;grid-auto-rows:160px}
+    .family .in{grid-template-columns:1fr}
     .prog-grid,.cost-grid,.apply .in{grid-template-columns:1fr}
     .quote{grid-template-columns:1fr;padding:36px 28px;gap:20px;text-align:center}
     .quote img{height:96px;margin:0 auto}
@@ -359,6 +392,8 @@
     .dc .pct{font-size:64px}.dc.gold .pct{font-size:80px}
     .thanks .acts{grid-template-columns:1fr}
     footer{padding-bottom:110px}
+    .fam-list{grid-template-columns:1fr}
+    .fam{height:120px}
     .m-cta{display:grid;grid-template-columns:1fr 1.4fr;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:60;padding:10px 12px calc(10px + env(safe-area-inset-bottom));
            background:rgba(255,255,255,.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 -8px 24px -12px rgba(12,28,66,.3);
            transform:translateY(110%);transition:transform .3s}
@@ -401,6 +436,7 @@
 
 <!-- HERO -->
 <section class="hero" id="top">
+  <div class="photo" aria-hidden="true"></div>
   <img class="crest-bg" src="assets/epsom-crest-white.svg" alt="">
   <div class="wrap in">
     <div>
@@ -619,6 +655,24 @@
   </div>
 </section>
 
+<!-- CAMPUS -->
+<section class="sec" id="campus">
+  <div class="wrap">
+    <div class="sec-head center rv">
+      <div class="eyebrow">Campus</div>
+      <h2 class="title">아이가 생활할 캠퍼스를 미리 만나보세요</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="gallery rv">
+      <figure><img src="assets/photos/campus-1.jpg" alt="Epsom College Malaysia 캠퍼스 전경"><figcaption>캠퍼스 전경</figcaption></figure>
+      <figure><img src="assets/photos/campus-2.jpg" alt="수업 모습"><figcaption>영어 수업</figcaption></figure>
+      <figure><img src="assets/photos/campus-3.jpg" alt="스포츠 시설"><figcaption>스포츠</figcaption></figure>
+      <figure><img src="assets/photos/campus-4.jpg" alt="기숙사 하우스"><figcaption>기숙사 하우스</figcaption></figure>
+      <figure><img src="assets/photos/campus-5.jpg" alt="STEAM 활동"><figcaption>STEAM & 창의활동</figcaption></figure>
+    </div>
+  </div>
+</section>
+
 <!-- STEPS -->
 <section class="sec" id="steps">
   <div class="wrap">
@@ -665,6 +719,7 @@
 
 <!-- APPLY -->
 <section class="sec apply" id="apply">
+  <div class="photo" aria-hidden="true"></div>
   <div class="wrap in">
     <div class="rv">
       <div class="eyebrow" style="color:var(--teal-lt)">Reservation</div>
@@ -724,17 +779,41 @@
   </div>
 </section>
 
+<section class="family" aria-label="Family Site">
+  <div class="wrap in">
+    <div><h3>FAMILY SITE</h3><p>주최 · 캠프 장소 · 후원사</p></div>
+    <div class="fam-list">
+      <a class="fam" href="https://knnedu.kr:4447/" target="_blank" rel="noopener">
+        <span class="role">주최</span>
+        <span class="nm">꿈잡끼교육네트웍스(주)</span>
+      </a>
+      <a class="fam" href="https://www.epsomcollege.edu.my/" target="_blank" rel="noopener">
+        <span class="role">캠프 장소</span>
+        <img src="assets/epsom-logo.svg" alt="Epsom College Malaysia">
+      </a>
+      <a class="fam" href="https://arauhak.org/" target="_blank" rel="noopener">
+        <span class="role">후원사</span>
+        <img src="assets/ara-uhak-logo.png" alt="주식회사 아라유학 ARA UHAK CO., LTD.">
+      </a>
+    </div>
+  </div>
+</section>
+
 <footer>
   <div class="wrap">
     <div class="in">
       <div class="fl"><img src="assets/epsom-logo-white.svg" alt="Epsom College Malaysia"></div>
       <div class="fr">
-        <b>2027 Epsom College Malaysia Winter Discovery Camp</b><br>
-        주최 : 꿈잡끼교육네트웍스(주) · <a href="https://knnedu.kr:4447/" target="_blank" rel="noopener" style="text-decoration:underline">knnedu.kr</a><br>
-        캠프 문의 담당 : 차지안 본부장 ☎ 010-4822-3528
+        <b>2027 Epsom College Malaysia Winter Discovery Camp</b>
+        <dl class="credits">
+          <dt>주최</dt><dd>꿈잡끼교육네트웍스(주)</dd>
+          <dt>캠프 장소</dt><dd>Epsom International School (Epsom College Malaysia)</dd>
+          <dt>후원사</dt><dd>Ara 유학 (말레이시아)</dd>
+        </dl>
+        <div class="contact-line">캠프 문의 담당 : 차지안 본부장 ☎ <a href="tel:01048223528">010-4822-3528</a></div>
       </div>
     </div>
-    <p class="disc">본 페이지의 원화 금액은 1링깃 ≈ 350원 기준 예상치이며, 환율 및 항공권 가격에 따라 변동될 수 있습니다. 캠프 세부 프로그램과 일정은 학교 사정에 따라 일부 변경될 수 있습니다. Epsom College Malaysia 명칭과 로고는 해당 학교에 귀속됩니다.<br>© 2026 꿈잡끼교육네트웍스(주) All rights reserved.</p>
+    <p class="disc">본 페이지의 원화 금액은 1링깃 ≈ 350원 기준 예상치이며, 환율 및 항공권 가격에 따라 변동될 수 있습니다. 캠프 세부 프로그램과 일정은 학교 사정에 따라 일부 변경될 수 있습니다. Epsom College Malaysia 명칭과 로고는 해당 학교에, 아라유학 로고는 (주)아라유학에 귀속됩니다.<br>© 2026 꿈잡끼교육네트웍스(주) All rights reserved.</p>
   </div>
 </footer>
 
@@ -811,6 +890,16 @@ var EARLY_BIRD_END = new Date('2026-11-30T23:59:59+09:00');
   }
   document.querySelectorAll('#calc input').forEach(function(i){i.addEventListener('change',calc)});
   calc(); tick();
+
+  /* campus gallery: drop photos that aren't uploaded yet; hide section if none */
+  (function(){
+    var sec=document.getElementById('campus'), figs=sec.querySelectorAll('figure'), left=figs.length;
+    figs.forEach(function(f){
+      var img=f.querySelector('img');
+      function gone(){f.remove(); if(--left===0) sec.hidden=true;}
+      if(img.complete && img.naturalWidth===0) gone(); else img.addEventListener('error',gone);
+    });
+  })();
 
   /* form */
   var form=document.getElementById('applyForm');
