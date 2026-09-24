@@ -304,9 +304,9 @@
   .thanks .acts .btn{height:50px;font-size:15px}
 
   /* photo layers: show only once the image files exist in assets/photos/ */
-  .hero .photo{position:absolute;inset:0;background:url('assets/photos/hero.jpg') center/cover no-repeat;opacity:.34;mix-blend-mode:luminosity}
-  .hero .photo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,18,45,.92) 0%,rgba(7,18,45,.55) 55%,rgba(7,18,45,.35) 100%)}
-  .apply .photo{position:absolute;inset:0;background:url('assets/photos/apply.jpg') center/cover no-repeat;opacity:.16}
+  .hero .photo{position:absolute;inset:0;background:url('assets/photos/hero.jpg') center 70%/cover no-repeat}
+  .hero .photo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,18,45,.94) 0%,rgba(7,18,45,.78) 45%,rgba(7,18,45,.45) 100%),linear-gradient(0deg,rgba(7,18,45,.85) 0%,transparent 35%)}
+  .apply .photo{position:absolute;inset:0;background:url('assets/photos/apply.jpg') center/cover no-repeat;opacity:.22}
 
   .gallery{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:220px;gap:14px}
   .gallery figure{position:relative;overflow:hidden;border-radius:20px;background:var(--sand)}
@@ -662,13 +662,18 @@
       <div class="eyebrow">Campus</div>
       <h2 class="title">아이가 생활할 캠퍼스를 미리 만나보세요</h2>
       <div class="rule"></div>
+      <p class="lead">지난 디스커버리 캠프의 실제 모습입니다. 수업, 스포츠 아카데미, 공연까지 캠퍼스 안에서 모두 이루어집니다.</p>
     </div>
     <div class="gallery rv">
-      <figure><img src="assets/photos/campus-1.jpg" alt="Epsom College Malaysia 캠퍼스 전경"><figcaption>캠퍼스 전경</figcaption></figure>
-      <figure><img src="assets/photos/campus-2.jpg" alt="수업 모습"><figcaption>영어 수업</figcaption></figure>
-      <figure><img src="assets/photos/campus-3.jpg" alt="스포츠 시설"><figcaption>스포츠</figcaption></figure>
-      <figure><img src="assets/photos/campus-4.jpg" alt="기숙사 하우스"><figcaption>기숙사 하우스</figcaption></figure>
-      <figure><img src="assets/photos/campus-5.jpg" alt="STEAM 활동"><figcaption>STEAM & 창의활동</figcaption></figure>
+      <figure><img src="assets/photos/campus-1.jpg" alt="Epsom College Malaysia 캠퍼스 항공 전경"><figcaption>캠퍼스 전경</figcaption></figure>
+      <figure><img src="assets/photos/campus-2.jpg" alt="교사와 1:1로 공부하는 학생"><figcaption>소수정예 영어 수업</figcaption></figure>
+      <figure><img src="assets/photos/campus-3.jpg" alt="함께 활동하며 웃는 학생들"><figcaption>함께 배우는 STEAM 활동</figcaption></figure>
+      <figure><img src="assets/photos/campus-4.jpg" alt="축구 코치와 훈련하는 학생들"><figcaption>축구 아카데미</figcaption></figure>
+      <figure><img src="assets/photos/campus-5.jpg" alt="실내 클레이 코트 테니스 훈련"><figcaption>테니스 아카데미</figcaption></figure>
+      <figure><img src="assets/photos/campus-6.jpg" alt="드라이빙 레인지 골프 수업"><figcaption>골프 아카데미</figcaption></figure>
+      <figure><img src="assets/photos/campus-7.jpg" alt="직접 만든 의상으로 발표하는 학생들"><figcaption>창의 활동 발표</figcaption></figure>
+      <figure><img src="assets/photos/campus-8.jpg" alt="강당에 모인 캠프 참가자들"><figcaption>캠프 공연·행사</figcaption></figure>
+      <figure><img src="assets/photos/campus-9.jpg" alt="캠프에서 만난 친구들"><figcaption>친구들과의 추억</figcaption></figure>
     </div>
   </div>
 </section>
