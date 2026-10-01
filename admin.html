@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>상담 신청 관리 | 엡솜 겨울캠프</title>
+<link rel="icon" href="assets/epsom-crest.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  :root{--navy:#0c1c42;--navy-deep:#07122d;--teal:#15a38a;--teal-soft:#e6f5f1;--gold:#c9a45c;--bg:#f5f6f8;--line:#e3e6ec;--ink:#0f1a33;--muted:#5b6680;--red:#c2413b}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Pretendard',-apple-system,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;background:var(--bg);color:var(--ink);word-break:keep-all}
+  a{color:inherit}
+  button,input,select,textarea{font-family:inherit;font-size:14px}
+  .top{background:var(--navy-deep);color:#fff}
+  .top .in{max-width:1280px;margin:0 auto;padding:0 20px;height:64px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .top .brand{display:flex;align-items:center;gap:10px;font-weight:800}
+  .top .brand img{height:34px}
+  .top .brand small{display:block;font-weight:500;font-size:12px;color:rgba(255,255,255,.6)}
+  .top .acts{display:flex;gap:8px}
+  .tbtn{height:36px;padding:0 14px;border-radius:999px;border:1px solid rgba(255,255,255,.25);background:transparent;color:#fff;cursor:pointer;font-weight:600;text-decoration:none;display:inline-flex;align-items:center}
+  .tbtn:hover{background:rgba(255,255,255,.1)}
+  main{max-width:1280px;margin:0 auto;padding:28px 20px 60px}
+
+  .login{max-width:380px;margin:80px auto;background:#fff;border-radius:20px;padding:36px 32px;box-shadow:0 20px 50px -24px rgba(12,28,66,.35)}
+  .login h1{font-size:22px;color:var(--navy)}
+  .login p{color:var(--muted);font-size:14px;margin-top:6px}
+  .login input{width:100%;height:50px;border:1.5px solid var(--line);border-radius:12px;padding:0 14px;margin-top:20px;font-size:16px}
+  .login input:focus{outline:0;border-color:var(--teal)}
+  .login button{width:100%;height:50px;border:0;border-radius:12px;background:var(--teal);color:#fff;font-weight:800;font-size:16px;margin-top:12px;cursor:pointer}
+  .msg{margin-top:14px;font-size:14px;color:var(--red);line-height:1.6}
+  .msg.info{color:var(--muted)}
+
+  .bar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-bottom:18px}
+  .bar h1{font-size:22px;color:var(--navy)}
+  .bar h1 small{font-size:14px;color:var(--muted);font-weight:500;margin-left:6px}
+  .tools{display:flex;gap:8px;flex-wrap:wrap}
+  .tools input{height:40px;border:1px solid var(--line);border-radius:10px;padding:0 12px;min-width:220px;background:#fff}
+  .btn{height:40px;padding:0 16px;border-radius:10px;border:1px solid var(--line);background:#fff;cursor:pointer;font-weight:700;color:var(--navy)}
+  .btn.primary{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+  .chip{height:36px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:#fff;cursor:pointer;font-weight:700;color:var(--muted)}
+  .chip b{margin-left:4px;color:var(--navy)}
+  .chip.on{background:var(--navy);border-color:var(--navy);color:#fff}
+  .chip.on b{color:#fff}
+
+  .tbl{background:#fff;border-radius:16px;border:1px solid var(--line);overflow:auto}
+  table{width:100%;border-collapse:collapse;min-width:1080px}
+  th,td{padding:12px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;font-size:14px}
+  th{background:#fafbfc;color:var(--muted);font-size:12.5px;font-weight:700;white-space:nowrap;position:sticky;top:0}
+  tr:last-child td{border-bottom:0}
+  td.when{white-space:nowrap;color:var(--muted);font-size:13px}
+  td .nm{font-weight:800}
+  td .sub{color:var(--muted);font-size:12.5px;margin-top:2px}
+  td a.tel{font-weight:700;color:var(--teal);text-decoration:none;white-space:nowrap}
+  td.msgcell{max-width:240px;white-space:pre-wrap;color:var(--ink)}
+  select.st{height:34px;border-radius:8px;border:1px solid var(--line);padding:0 8px;font-weight:700}
+  select.st[data-v=new]{background:#fff4e0;color:#8a5a00;border-color:#f0d39b}
+  select.st[data-v=contacted]{background:#e8f0ff;color:#2a4fa8;border-color:#bcd0f5}
+  select.st[data-v=registered]{background:var(--teal-soft);color:#0e7a66;border-color:#a8dccf}
+  select.st[data-v=closed]{background:#f0f1f3;color:#666;border-color:#ddd}
+  textarea.memo{width:200px;min-height:56px;border:1px solid var(--line);border-radius:8px;padding:8px;resize:vertical}
+  .del{border:0;background:none;color:var(--red);cursor:pointer;font-weight:700;font-size:13px}
+  .saved{font-size:11.5px;color:var(--teal);height:14px}
+  .empty{padding:60px 20px;text-align:center;color:var(--muted)}
+
+  @media (max-width:760px){
+    .tbl{background:none;border:0;overflow:visible}
+    table,thead,tbody,tr,td{display:block;min-width:0}
+    thead{display:none}
+    tr{background:#fff;border:1px solid var(--line);border-radius:14px;margin-bottom:12px;padding:6px 4px}
+    td{border:0;padding:6px 12px}
+    td[data-l]::before{content:attr(data-l);display:block;font-size:11.5px;color:var(--muted);font-weight:700;margin-bottom:2px}
+    textarea.memo{width:100%}
+    .tools input{min-width:0;flex:1}
+    .top .brand small{display:none}
+  }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="in">
+    <div class="brand"><img src="assets/epsom-crest-white.svg" alt=""><div>상담 신청 관리<small>2027 Epsom 겨울 디스커버리 캠프</small></div></div>
+    <div class="acts">
+      <a class="tbtn" href="/">홈페이지</a>
+      <button class="tbtn" id="logout" hidden>로그아웃</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="login" id="login">
+    <h1>관리자 로그인</h1>
+    <p>상담 신청(방명록) 내역은 관리자만 볼 수 있습니다.</p>
+    <form id="loginForm">
+      <input type="password" id="pw" placeholder="관리자 비밀번호" autocomplete="current-password" required>
+      <button type="submit">로그인</button>
+    </form>
+    <div class="msg" id="loginMsg"></div>
+  </section>
+
+  <section id="board" hidden>
+    <div class="bar">
+      <h1>상담 신청 내역 <small id="total"></small></h1>
+      <div class="tools">
+        <input type="search" id="q" placeholder="이름 · 연락처 · 문의 내용 검색">
+        <button class="btn" id="reload">새로고침</button>
+        <button class="btn primary" id="csv">엑셀(CSV) 다운로드</button>
+      </div>
+    </div>
+    <div class="chips" id="chips"></div>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>접수 시각</th><th>학부모</th><th>연락처</th><th>학생</th><th>희망 캠프</th><th>관심 혜택</th><th>문의 사항</th><th>상태</th><th>메모</th><th></th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+      <div class="empty" id="empty" hidden>아직 접수된 상담 신청이 없습니다.</div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function(){
+  var API='/api/admin', KEY='epsom-admin-pw';
+  var STATUS={new:'신규',contacted:'상담 중',registered:'등록 완료',closed:'종료'};
+  var ERR={
+    unauthorized:'비밀번호가 올바르지 않습니다.',
+    too_many:'로그인 시도가 너무 많습니다. 1시간 후 다시 시도해 주세요.',
+    password_not_configured:'관리자 비밀번호가 아직 설정되지 않았습니다. Vercel 프로젝트 설정 → Environment Variables 에 ADMIN_PASSWORD 를 추가한 뒤 다시 배포해 주세요.',
+    storage_not_configured:'저장소가 아직 연결되지 않았습니다. Vercel 프로젝트 → Storage 에서 Upstash for Redis 를 만들어 이 프로젝트에 연결한 뒤 다시 배포해 주세요.'
+  };
+  var items=[], filter='all', pw='';
+  try{pw=sessionStorage.getItem(KEY)||''}catch(e){}
+
+  var $=function(id){return document.getElementById(id)};
+  function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+  function fmt(iso){var d=new Date(iso);return isNaN(d)?'':d.toLocaleString('ko-KR',{timeZone:'Asia/Seoul',year:'2-digit',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'})}
+
+  function call(method,body){
+    return fetch(API,{method:method,headers:{'Content-Type':'application/json','x-admin-password':pw},body:body?JSON.stringify(body):undefined})
+      .then(function(r){return r.json().catch(function(){return {ok:false,error:'server_error'}}).then(function(j){j.status=r.status;return j})});
+  }
+
+  function showLogin(msg){
+    $('login').hidden=false;$('board').hidden=true;$('logout').hidden=true;
+    $('loginMsg').textContent=msg||'';
+  }
+  function load(){
+    $('loginMsg').className='msg info';$('loginMsg').textContent='불러오는 중...';
+    call('GET').then(function(j){
+      $('loginMsg').className='msg';
+      if(!j.ok){
+        if(j.error==='unauthorized'||j.error==='too_many'){try{sessionStorage.removeItem(KEY)}catch(e){}}
+        showLogin(ERR[j.error]||('오류가 발생했습니다. ('+(j.error||j.status)+')'));return;
+      }
+      try{sessionStorage.setItem(KEY,pw)}catch(e){}
+      items=j.items||[];
+      $('login').hidden=true;$('board').hidden=false;$('logout').hidden=false;
+      render();
+    }).catch(function(){showLogin('서버에 연결할 수 없습니다. 잠시 후 다시 시도해 주세요.')});
+  }
+
+  function visible(){
+    var q=$('q').value.trim().toLowerCase();
+    return items.filter(function(it){
+      if(filter!=='all'&&it.status!==filter)return false;
+      if(!q)return true;
+      return [it.parent,it.phone,it.student,it.message,it.memo,it.camp].join(' ').toLowerCase().indexOf(q)>=0;
+    });
+  }
+  function render(){
+    var counts={all:items.length};Object.keys(STATUS).forEach(function(k){counts[k]=0});
+    items.forEach(function(it){counts[it.status]=(counts[it.status]||0)+1});
+    $('total').textContent='총 '+items.length+'건';
+    $('chips').innerHTML=[['all','전체']].concat(Object.keys(STATUS).map(function(k){return [k,STATUS[k]]})).map(function(c){
+      return '<button class="chip'+(filter===c[0]?' on':'')+'" data-f="'+c[0]+'">'+c[1]+'<b>'+(counts[c[0]]||0)+'</b></button>';
+    }).join('');
+    var list=visible();
+    $('empty').hidden=list.length>0;
+    $('empty').textContent=items.length?'조건에 맞는 내역이 없습니다.':'아직 접수된 상담 신청이 없습니다.';
+    $('rows').innerHTML=list.map(function(it){
+      var opts=Object.keys(STATUS).map(function(k){return '<option value="'+k+'"'+(it.status===k?' selected':'')+'>'+STATUS[k]+'</option>'}).join('');
+      return '<tr data-id="'+esc(it.id)+'">'+
+        '<td class="when" data-l="접수 시각">'+fmt(it.createdAt)+'</td>'+
+        '<td data-l="학부모"><div class="nm">'+esc(it.parent)+'</div></td>'+
+        '<td data-l="연락처"><a class="tel" href="tel:'+esc(String(it.phone).replace(/[^0-9]/g,''))+'">'+esc(it.phone)+'</a></td>'+
+        '<td data-l="학생"><div class="nm">'+esc(it.student)+'</div><div class="sub">'+esc(it.age)+'</div></td>'+
+        '<td data-l="희망 캠프">'+esc(it.camp)+'</td>'+
+        '<td data-l="관심 혜택">'+esc(it.benefit||'-')+'</td>'+
+        '<td class="msgcell" data-l="문의 사항">'+esc(it.message||'-')+'</td>'+
+        '<td data-l="상태"><select class="st" data-v="'+esc(it.status)+'">'+opts+'</select><div class="saved"></div></td>'+
+        '<td data-l="메모"><textarea class="memo" placeholder="상담 메모">'+esc(it.memo)+'</textarea><div class="saved"></div></td>'+
+        '<td><button class="del">삭제</button></td></tr>';
+    }).join('');
+  }
+  function flash(el,text){var s=el.parentNode.querySelector('.saved');if(s){s.textContent=text;setTimeout(function(){s.textContent=''},1800)}}
+  function find(id){for(var i=0;i<items.length;i++)if(items[i].id===id)return items[i]}
+
+  $('loginForm').addEventListener('submit',function(e){e.preventDefault();pw=$('pw').value;load()});
+  $('logout').addEventListener('click',function(){pw='';try{sessionStorage.removeItem(KEY)}catch(e){};$('pw').value='';showLogin('')});
+  $('reload').addEventListener('click',load);
+  $('q').addEventListener('input',render);
+  $('chips').addEventListener('click',function(e){var b=e.target.closest('.chip');if(b){filter=b.getAttribute('data-f');render()}});
+
+  $('rows').addEventListener('change',function(e){
+    var el=e.target, tr=el.closest('tr'); if(!tr||!el.classList.contains('st'))return;
+    var id=tr.getAttribute('data-id'), v=el.value; el.setAttribute('data-v',v);
+    call('POST',{action:'update',id:id,status:v}).then(function(j){
+      if(j.ok){find(id).status=v;flash(el,'저장됨');render()}else{flash(el,'저장 실패')}
+    });
+  });
+  $('rows').addEventListener('focusout',function(e){
+    var el=e.target, tr=el.closest('tr'); if(!tr||!el.classList.contains('memo'))return;
+    var id=tr.getAttribute('data-id'), it=find(id); if(!it||it.memo===el.value)return;
+    call('POST',{action:'update',id:id,memo:el.value}).then(function(j){
+      if(j.ok){it.memo=el.value;flash(el,'메모 저장됨')}else{flash(el,'저장 실패')}
+    });
+  });
+  $('rows').addEventListener('click',function(e){
+    if(!e.target.classList.contains('del'))return;
+    var tr=e.target.closest('tr'), id=tr.getAttribute('data-id'), it=find(id);
+    if(!confirm((it?it.parent+' / '+it.student:'이 항목')+' 상담 신청을 삭제할까요? 되돌릴 수 없습니다.'))return;
+    call('POST',{action:'delete',id:id}).then(function(j){
+      if(j.ok){items=items.filter(function(x){return x.id!==id});render()}else alert('삭제하지 못했습니다.');
+    });
+  });
+  $('csv').addEventListener('click',function(){
+    var head=['접수 시각','학부모','연락처','학생','나이','희망 캠프','관심 혜택','문의 사항','상태','메모'];
+    var rows=visible().map(function(it){return [fmt(it.createdAt),it.parent,it.phone,it.student,it.age,it.camp,it.benefit,it.message,STATUS[it.status]||it.status,it.memo]});
+    var csv=[head].concat(rows).map(function(r){return r.map(function(c){return '"'+String(c==null?'':c).replace(/"/g,'""')+'"'}).join(',')}).join('\r\n');
+    var a=document.createElement('a');
+    a.href=URL.createObjectURL(new Blob(['﻿'+csv],{type:'text/csv;charset=utf-8'}));
+    a.download='epsom-consultations-'+new Date().toISOString().slice(0,10)+'.csv';
+    document.body.appendChild(a);a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},1000);
+  });
+
+  if(pw)load();
+})();
+</script>
+</body>
+</html>

@@ -32,6 +32,7 @@
     --shadow:0 20px 50px -24px rgba(12,28,66,.35);
   }
   *{box-sizing:border-box;margin:0;padding:0}
+  [hidden]{display:none!important}
   html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
   body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;
        background:var(--bg);color:var(--ink);line-height:1.65;word-break:keep-all;overflow-x:hidden}
@@ -72,9 +73,25 @@
   .brand .bt{line-height:1.15}
   .brand .b1{font-family:'Cormorant Garamond',serif;font-weight:600;letter-spacing:.22em;font-size:16px}
   .brand .b2{font-family:'Cormorant Garamond',serif;letter-spacing:.34em;font-size:10.5px;color:var(--teal-lt)}
-  .nav .menu{display:flex;gap:32px;font-size:15px;font-weight:500;color:rgba(255,255,255,.82)}
+  .nav .menu{display:flex;gap:28px;font-size:15px;font-weight:500;color:rgba(255,255,255,.82);white-space:nowrap}
+  .nav .right,.nav .btn{white-space:nowrap}
+  @media (max-width:1240px){.nav .menu{display:none}}
   .nav .menu a:hover{color:#fff}
   .nav .cta{height:44px;padding:0 20px;font-size:14px}
+  .nav .right{display:flex;align-items:center;gap:10px}
+  .nav .cta-line{height:44px;padding:0 18px;font-size:14px;border:1.5px solid rgba(255,255,255,.35);color:#fff;background:transparent}
+  .nav .cta-line:hover{background:rgba(255,255,255,.1)}
+  .nav .admin{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px;border-radius:999px;font-size:12px;font-weight:700;
+       color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.2);margin-left:4px}
+  .nav .admin:hover{color:#fff;border-color:rgba(255,255,255,.5)}
+  .nav .admin svg{width:13px;height:13px}
+  .btn-gold{background:linear-gradient(120deg,#f0dcae,#c9a45c);color:var(--navy-deep);box-shadow:0 12px 30px -10px rgba(201,164,92,.7)}
+  .prog .reg{margin-top:22px;width:100%}
+  .prog.sig .reg{background:var(--gold);color:var(--navy-deep);box-shadow:none}
+  .direct{margin-top:28px;border-radius:20px;padding:22px 24px;background:linear-gradient(120deg,rgba(240,220,174,.16),rgba(201,164,92,.08));border:1px solid rgba(232,207,152,.45)}
+  .direct b{color:var(--gold-lt);font-size:16px}
+  .direct p{font-size:14px;color:rgba(255,255,255,.72);margin:4px 0 14px}
+  .direct .btn{height:50px;width:100%}
   .nav.scrolled{background:rgba(7,18,45,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 1px 0 rgba(255,255,255,.06)}
 
   /* hero */
@@ -422,7 +439,8 @@
     .hero .in{padding:104px 16px 72px}
     .brand img{height:38px}
     .brand .b1{font-size:14px}
-    .nav .cta{display:none}
+    .nav .cta,.nav .cta-line{display:none}
+    .nav .admin{height:30px;padding:0 10px}
     .hero .ctas .btn{flex:1 1 100%}
     .facts dd{font-size:15px}
     .hero-card{padding:26px 20px}
@@ -444,7 +462,7 @@
     .acad .ph{width:auto;aspect-ratio:16/10}
     .stay{grid-template-columns:1fr;padding:28px 22px}
     .fam{height:120px}
-    .m-cta{display:grid;grid-template-columns:1fr 1.4fr;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:60;padding:10px 12px calc(10px + env(safe-area-inset-bottom));
+    .m-cta{display:grid;grid-template-columns:1fr 1fr;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:60;padding:10px 12px calc(10px + env(safe-area-inset-bottom));
            background:rgba(255,255,255,.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 -8px 24px -12px rgba(12,28,66,.3);
            transform:translateY(110%);transition:transform .3s}
     .m-cta.show{transform:none}
@@ -460,6 +478,7 @@
     <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></symbol>
     <symbol id="i-chat" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.5 2 10.8c0 2.8 1.9 5.2 4.7 6.6l-1 3.6c-.1.3.3.6.6.4l4.2-2.8c.5.1 1 .1 1.5.1 5.5 0 10-3.5 10-7.9S17.5 3 12 3z"/></symbol>
     <symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></symbol>
+    <symbol id="i-ext" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol>
     <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
     <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></symbol>
     <symbol id="i-wallet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7V5a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-4a2 2 0 0 0 0 4h4v2a1 1 0 0 1-1 1H5a2 2 0 0 1-2-2V6"/><path d="M21 13v4"/></symbol>
@@ -481,7 +500,11 @@
       <a href="#benefits">할인 혜택</a>
       <a href="#faq">FAQ</a>
     </nav>
-    <a class="btn btn-teal cta" href="#apply">상담·예약 신청</a>
+    <div class="right">
+      <a class="btn cta-line" href="#apply">상담 신청</a>
+      <a class="btn btn-gold cta js-register" href="https://knnedu.kr:4447/" target="_blank" rel="noopener">신청·결제 <svg><use href="#i-ext"/></svg></a>
+      <a class="admin" href="/admin" title="관리자 페이지 (상담 신청 내역)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>관리자</a>
+    </div>
   </div>
 </header>
 
@@ -496,8 +519,8 @@
       <h1 class="rv d1">이번 겨울방학,<br>영국 명문 보딩스쿨에서<br><em>영어로 살아보는</em> 시간</h1>
       <p class="sub rv d2">한국이 가장 추운 1월, 적도의 말레이시아에서 영국 정통 보딩스쿨 Epsom College의 수업·스포츠·기숙사 생활을 그대로 경험합니다.</p>
       <div class="ctas rv d2">
-        <a class="btn btn-teal" href="#apply">무료 상담·예약 신청 <svg><use href="#i-arrow"/></svg></a>
-        <a class="btn btn-line" href="#cost">비용 한눈에 보기</a>
+        <a class="btn btn-gold js-register" href="https://knnedu.kr:4447/" target="_blank" rel="noopener">캠프 신청·결제 바로가기 <svg><use href="#i-ext"/></svg></a>
+        <a class="btn btn-teal" href="#apply">무료 상담 신청 <svg><use href="#i-arrow"/></svg></a>
       </div>
       <dl class="facts rv d3">
         <div><dt>PERIOD</dt><dd>2주 · 4주 선택</dd></div>
@@ -608,6 +631,7 @@
           <div><div class="rm">RM 10,000</div><div class="krw">약 350<small>만 원</small></div></div>
           <div class="eb">얼리버드 적용 시<b>약 297.5만 원</b></div>
         </div>
+        <a class="btn btn-teal reg js-register" href="https://knnedu.kr:4447/" target="_blank" rel="noopener">Camp 1 신청·결제 <svg><use href="#i-ext"/></svg></a>
       </article>
       <article class="prog sig rv d1">
         <span class="badge">인기 추천</span>
@@ -624,6 +648,7 @@
           <div><div class="rm">RM 20,000</div><div class="krw">약 700<small>만 원</small></div></div>
           <div class="eb">얼리버드 적용 시<b>약 595만 원</b></div>
         </div>
+        <a class="btn reg js-register" href="https://knnedu.kr:4447/" target="_blank" rel="noopener">Signature Camp 신청·결제 <svg><use href="#i-ext"/></svg></a>
       </article>
     </div>
     <p class="fine rv">* 원화 금액은 1링깃 ≈ 350원 기준 예상 금액이며, 실제 금액은 납부 시점 환율에 따라 달라질 수 있습니다. 세부 시간표는 학교 공식 안내에 따릅니다.</p>
@@ -794,9 +819,9 @@
       <p class="lead">주최사 꿈잡끼교육네트웍스(주)가 신청부터 출국 준비, 인솔까지 함께합니다.</p>
     </div>
     <div class="steps">
-      <div class="step rv"><div class="c">01</div><h4>상담 신청</h4><p>아래 신청서 또는<br>전화·문자</p></div>
+      <div class="step rv"><div class="c">01</div><h4>상담 신청</h4><p>이 페이지 상담 신청서<br>또는 전화·문자</p></div>
       <div class="step rv d1"><div class="c">02</div><h4>1:1 상담·설명회</h4><p>캠프 선택과<br>할인 적용 안내</p></div>
-      <div class="step rv d2"><div class="c">03</div><h4>등록·학비 납부</h4><p>학교 직납 또는<br>당사 대행</p></div>
+      <div class="step rv d2"><div class="c">03</div><h4>신청·결제</h4><p>꿈잡끼교육네트웍스<br>사이트에서 바로</p></div>
       <div class="step rv d3"><div class="c">04</div><h4>출국 준비</h4><p>항공·보험·<br>준비물 안내</p></div>
       <div class="step rv d3"><div class="c">05</div><h4>캠프 시작</h4><p>2027년 1월 10일<br>인솔자 동행</p></div>
     </div>
@@ -848,9 +873,14 @@
   <div class="photo" aria-hidden="true"></div>
   <div class="wrap in">
     <div class="rv">
-      <div class="eyebrow" style="color:var(--teal-lt)">Reservation</div>
-      <h2 class="title">지금 상담·예약을<br>신청하세요</h2>
-      <p class="lead">신청서를 남겨주시면 담당자가 순차적으로 연락드려 일정·비용·할인 적용을 자세히 안내해 드립니다.</p>
+      <div class="eyebrow" style="color:var(--teal-lt)">Consultation</div>
+      <h2 class="title">궁금한 점이 있다면<br>먼저 상담받아 보세요</h2>
+      <p class="lead">상담 신청서를 남겨주시면 담당자가 순차적으로 연락드려 일정·비용·할인 적용을 자세히 안내해 드립니다.</p>
+      <div class="direct">
+        <b>바로 등록하실 분은</b>
+        <p>캠프 신청과 결제는 주최사 꿈잡끼교육네트웍스(주) 사이트에서 진행됩니다.</p>
+        <a class="btn btn-gold js-register" href="https://knnedu.kr:4447/" target="_blank" rel="noopener">캠프 신청·결제 바로가기 <svg><use href="#i-ext"/></svg></a>
+      </div>
       <div class="contact">
         <a href="tel:01048223528"><span class="ci"><svg><use href="#i-phone"/></svg></span><div><small>캠프 문의 담당 · 차지안 본부장</small><b>010-4822-3528</b></div></a>
         <a href="sms:01048223528"><span class="ci"><svg><use href="#i-chat"/></svg></span><div><small>문자 상담</small><b>010-4822-3528</b></div></a>
@@ -861,7 +891,7 @@
 
     <div class="form rv d1">
       <div id="formInner">
-        <h3>캠프 상담·예약 신청서</h3>
+        <h3>캠프 상담 신청서</h3>
         <p class="fn">1분이면 충분합니다. <i style="color:var(--teal);font-style:normal">*</i> 표시는 필수 항목입니다.</p>
         <form id="applyForm" novalidate>
           <div class="fgrid">
@@ -888,12 +918,13 @@
             <div class="f full"><label for="ms">문의 사항</label><textarea id="ms" name="message" placeholder="궁금하신 점을 자유롭게 남겨주세요."></textarea></div>
             <label class="agree"><input type="checkbox" id="agree" required><span>상담을 위한 개인정보(성함·연락처·학생 정보) 수집·이용에 동의합니다. 수집된 정보는 상담 목적으로만 사용되며 상담 완료 후 지체 없이 파기됩니다.</span></label>
           </div>
-          <button class="btn btn-teal submit" type="submit">상담·예약 신청하기 <svg><use href="#i-arrow"/></svg></button>
+          <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+          <button class="btn btn-teal submit" type="submit">상담 신청하기 <svg><use href="#i-arrow"/></svg></button>
         </form>
       </div>
       <div class="thanks" id="thanks" role="status">
         <div class="ok"><svg><use href="#i-check"/></svg></div>
-        <h3>신청이 접수되었습니다</h3>
+        <h3>상담 신청이 접수되었습니다</h3>
         <p id="thanksMsg">담당자가 확인 후 남겨주신 연락처로 연락드리겠습니다.</p>
         <div class="sum" id="sum" hidden></div>
         <div class="acts" id="acts" hidden>
@@ -944,8 +975,8 @@
 </footer>
 
 <div class="m-cta" id="mcta">
-  <a class="btn btn-navy" href="tel:01048223528"><svg><use href="#i-phone"/></svg>전화</a>
-  <a class="btn btn-teal" href="#apply">상담·예약 신청</a>
+  <a class="btn btn-teal" href="#apply">상담 신청</a>
+  <a class="btn btn-gold js-register" href="https://knnedu.kr:4447/" target="_blank" rel="noopener">신청·결제 <svg><use href="#i-ext"/></svg></a>
 </div>
 
 <script>
@@ -961,6 +992,11 @@
 var NOTIFY_EMAIL = 'rush3528@gmail.com';
 var FORM_ENDPOINT = 'https://formsubmit.co/ajax/' + NOTIFY_EMAIL;
 var CONTACT_SMS = '01048223528';
+/* 캠프 신청·결제 바로가기 주소 (꿈잡끼교육네트웍스 사이트). 상품 페이지 주소가 생기면 여기만 바꾸면 됩니다. */
+var REGISTER_URL = 'https://knnedu.kr:4447/';
+/* 상담 신청 내역 저장 (관리자 페이지 /admin 에서 확인) */
+var SAVE_ENDPOINT = '/api/consult';
+document.querySelectorAll('.js-register').forEach(function(a){a.href=REGISTER_URL});
 var EARLY_BIRD_END = new Date('2026-11-30T23:59:59+09:00');
 
 (function(){
@@ -1056,18 +1092,22 @@ var EARLY_BIRD_END = new Date('2026-11-30T23:59:59+09:00');
       document.getElementById('smsBtn').href='sms:'+CONTACT_SMS+sep+'body='+encodeURIComponent(summary);
       done();
     }
-    if(!FORM_ENDPOINT||!window.fetch){fallback();return}
-    fetch(FORM_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+    if(form.website.value){done();return}
+    if(!window.fetch){fallback();return}
+    var saved=fetch(SAVE_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
+      .then(function(r){return r.ok}).catch(function(){return false});
+    var mailed=!FORM_ENDPOINT?Promise.resolve(false):fetch(FORM_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
       body:JSON.stringify({
-        _subject:'[엡솜 겨울캠프] 상담·예약 신청 - '+sn+' ('+ag+')',
+        _subject:'[엡솜 겨울캠프] 상담 신청 - '+sn+' ('+ag+')',
         _template:'table', _captcha:'false',
         '학부모 성함':pn, '연락처':ph, '학생 이름':sn, '학생 나이':ag,
         '희망 캠프':camp, '관심 혜택':bens||'-', '문의 사항':data.message||'-',
         '접수 시각':new Date().toLocaleString('ko-KR',{timeZone:'Asia/Seoul'})
       })})
       .then(function(r){return r.json().catch(function(){return {}}).then(function(j){return r.ok&&String(j.success)!=='false'})})
-      .then(function(ok){ok?done():fallback()})
-      .catch(fallback)
+      .catch(function(){return false});
+    Promise.all([saved,mailed])
+      .then(function(r){(r[0]||r[1])?done():fallback()})
       .then(function(){btn.disabled=false;btn.innerHTML=btnHTML});
   });
   ['pn','ph','sn','ag'].forEach(function(id){document.getElementById(id).addEventListener('input',function(){this.closest('.f').classList.remove('invalid')})});
