@@ -28,6 +28,7 @@
   .login p{color:var(--muted);font-size:14px;margin-top:6px}
   .login input{width:100%;height:50px;border:1.5px solid var(--line);border-radius:12px;padding:0 14px;margin-top:20px;font-size:16px}
   .login input:focus{outline:0;border-color:var(--teal)}
+  .login input + input{margin-top:10px}
   .login button{width:100%;height:50px;border:0;border-radius:12px;background:var(--teal);color:#fff;font-weight:800;font-size:16px;margin-top:12px;cursor:pointer}
   .msg{margin-top:14px;font-size:14px;color:var(--red);line-height:1.6}
   .msg.info{color:var(--muted)}
@@ -100,6 +101,18 @@
     <div class="msg" id="loginMsg"></div>
   </section>
 
+  <section class="login" id="setup" hidden>
+    <h1>관리자 비밀번호 최초 설정</h1>
+    <p>처음 한 번만 하는 단계입니다. 전달받은 <b>설정 코드</b>와 앞으로 사용할 비밀번호를 입력해 주세요.</p>
+    <form id="setupForm">
+      <input type="text" id="scode" placeholder="설정 코드 (예: EPSOM-XXXX-XXXX-XXXX)" autocomplete="off" autocapitalize="characters" required>
+      <input type="password" id="npw" placeholder="새 관리자 비밀번호 (8자 이상)" autocomplete="new-password" minlength="8" required>
+      <input type="password" id="npw2" placeholder="새 비밀번호 확인" autocomplete="new-password" minlength="8" required>
+      <button type="submit">비밀번호 설정</button>
+    </form>
+    <div class="msg" id="setupMsg"></div>
+  </section>
+
   <section id="board" hidden>
     <div class="bar">
       <h1>상담 신청 내역 <small id="total"></small></h1>
@@ -127,8 +140,10 @@
   var ERR={
     unauthorized:'비밀번호가 올바르지 않습니다.',
     too_many:'로그인 시도가 너무 많습니다. 1시간 후 다시 시도해 주세요.',
-    password_not_configured:'관리자 비밀번호가 아직 설정되지 않았습니다. Vercel 프로젝트 설정 → Environment Variables 에 ADMIN_PASSWORD 를 추가한 뒤 다시 배포해 주세요.',
-    storage_not_configured:'저장소가 아직 연결되지 않았습니다. Vercel 프로젝트 → Storage 에서 Upstash for Redis 를 만들어 이 프로젝트에 연결한 뒤 다시 배포해 주세요.'
+    bad_setup_code:'설정 코드가 올바르지 않습니다. 전달받은 코드를 다시 확인해 주세요.',
+    too_short:'비밀번호는 8자 이상으로 정해 주세요.',
+    already_set:'이미 관리자 비밀번호가 설정되어 있습니다. 로그인해 주세요.',
+    storage_not_configured:'저장소에 연결할 수 없습니다. Vercel 프로젝트 → Storage → epsom-consults → Connect Project 로 이 프로젝트에 연결한 뒤 다시 배포(Redeploy)해 주세요.'
   };
   var items=[], filter='all', pw='';
   try{pw=sessionStorage.getItem(KEY)||''}catch(e){}
@@ -142,7 +157,13 @@
       .then(function(r){return r.json().catch(function(){return {ok:false,error:'server_error'}}).then(function(j){j.status=r.status;return j})});
   }
 
+  function showSetup(){
+    $('login').hidden=true;$('setup').hidden=false;$('board').hidden=true;
+    if(pw){$('npw').value=pw;$('npw2').value=pw}
+    $('scode').focus();
+  }
   function showLogin(msg){
+    $('setup').hidden=true;
     $('login').hidden=false;$('board').hidden=true;$('logout').hidden=true;
     $('loginMsg').textContent=msg||'';
   }
@@ -151,8 +172,9 @@
     call('GET').then(function(j){
       $('loginMsg').className='msg';
       if(!j.ok){
+        if(j.error==='setup_required'){showSetup();return}
         if(j.error==='unauthorized'||j.error==='too_many'){try{sessionStorage.removeItem(KEY)}catch(e){}}
-        showLogin(ERR[j.error]||('오류가 발생했습니다. ('+(j.error||j.status)+')'));return;
+        showLogin((ERR[j.error]||'오류가 발생했습니다.')+' (코드: '+(j.error||j.status)+(j.detail?' · '+j.detail:'')+')');return;
       }
       try{sessionStorage.setItem(KEY,pw)}catch(e){}
       items=j.items||[];
@@ -198,6 +220,20 @@
   function find(id){for(var i=0;i<items.length;i++)if(items[i].id===id)return items[i]}
 
   $('loginForm').addEventListener('submit',function(e){e.preventDefault();pw=$('pw').value;load()});
+  $('setupForm').addEventListener('submit',function(e){
+    e.preventDefault();
+    var a=$('npw').value, b2=$('npw2').value, m=$('setupMsg');
+    m.className='msg';
+    if(a!==b2){m.textContent='두 비밀번호가 일치하지 않습니다.';return}
+    m.className='msg info';m.textContent='설정 중...';
+    fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'setup',setupCode:$('scode').value,password:a})})
+      .then(function(r){return r.json().catch(function(){return {ok:false,error:'server_error'}})})
+      .then(function(j){
+        if(!j.ok){m.className='msg';m.textContent=(ERR[j.error]||'오류가 발생했습니다.')+' (코드: '+j.error+(j.detail?' · '+j.detail:'')+')';
+          if(j.error==='already_set')setTimeout(function(){showLogin('')},1500);return}
+        pw=a;$('setup').hidden=true;load();
+      }).catch(function(){m.className='msg';m.textContent='서버에 연결할 수 없습니다.'});
+  });
   $('logout').addEventListener('click',function(){pw='';try{sessionStorage.removeItem(KEY)}catch(e){};$('pw').value='';showLogin('')});
   $('reload').addEventListener('click',load);
   $('q').addEventListener('input',render);

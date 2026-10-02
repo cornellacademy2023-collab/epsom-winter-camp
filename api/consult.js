@@ -1,9 +1,8 @@
 // POST /api/consult — store one consultation request from the landing page form.
-const { HASH, storageReady, redis, clientIp, overLimit, readBody, clip, crypto } = require('./_lib');
+const { saveEntry, clientIp, overLimit, readBody, clip, storageErrorCode, crypto } = require('./_lib');
 
 module.exports = async (req, res) => {
   if (req.method !== 'POST') return res.status(405).json({ ok: false, error: 'Method not allowed' });
-  if (!storageReady()) return res.status(503).json({ ok: false, error: 'storage_not_configured' });
 
   const b = readBody(req);
   const rec = {
@@ -24,11 +23,11 @@ module.exports = async (req, res) => {
       return res.status(429).json({ ok: false, error: 'too_many' });
     }
     const id = `${Date.now()}-${crypto.randomBytes(4).toString('hex')}`;
-    const entry = { id, createdAt: new Date().toISOString(), status: 'new', memo: '', ...rec };
-    await redis('HSET', HASH, id, JSON.stringify(entry));
+    await saveEntry(req, { id, createdAt: new Date().toISOString(), status: 'new', memo: '', ...rec });
     return res.status(200).json({ ok: true });
   } catch (err) {
     console.error('consult save failed', err);
-    return res.status(500).json({ ok: false, error: 'save_failed' });
+    const code = storageErrorCode(err);
+    return res.status(code === 'storage_not_configured' ? 503 : 500).json({ ok: false, error: code });
   }
 };

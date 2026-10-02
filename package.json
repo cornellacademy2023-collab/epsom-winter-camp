@@ -1,0 +1,8 @@
+{
+  "name": "epsom-winter-camp",
+  "private": true,
+  "description": "2027 Epsom College Malaysia winter camp landing page and consultation API",
+  "dependencies": {
+    "@vercel/blob": "^2.8.0"
+  }
+}
