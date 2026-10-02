@@ -319,6 +319,7 @@
   .thanks .sum{text-align:left;background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-top:20px;font-size:14px;white-space:pre-line;color:var(--ink)}
   .thanks .acts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
   .thanks .acts .btn{height:50px;font-size:15px}
+  .thanks .diag{margin-top:14px;font-size:11.5px;color:#9aa3b5}
 
   /* photo layers: show only once the image files exist in assets/photos/ */
   .hero .photo{position:absolute;inset:0;background:url('assets/photos/hero.jpg') center 70%/cover no-repeat}
@@ -927,6 +928,7 @@
         <h3>상담 신청이 접수되었습니다</h3>
         <p id="thanksMsg">담당자가 확인 후 남겨주신 연락처로 연락드리겠습니다.</p>
         <div class="sum" id="sum" hidden></div>
+        <p class="diag" id="diag" hidden></p>
         <div class="acts" id="acts" hidden>
           <a class="btn btn-navy" id="smsBtn" href="#"><svg><use href="#i-phone"/></svg>문자로 전송</a>
           <a class="btn btn-teal" id="callBtn" href="tel:01048223528"><svg><use href="#i-phone"/></svg>전화 상담</a>
@@ -1090,12 +1092,17 @@ var EARLY_BIRD_END = new Date('2026-11-30T23:59:59+09:00');
       document.getElementById('acts').hidden=false;
       var sep=/iPhone|iPad|iPod/i.test(navigator.userAgent)?'&':'?';
       document.getElementById('smsBtn').href='sms:'+CONTACT_SMS+sep+'body='+encodeURIComponent(summary);
+      var dg=document.getElementById('diag'); dg.textContent='오류 코드 : '+diag.join(' / '); dg.hidden=false;
       done();
     }
+    var diag=[];
     if(form.website.value){done();return}
     if(!window.fetch){fallback();return}
     var saved=fetch(SAVE_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
-      .then(function(r){return r.ok}).catch(function(){return false});
+      .then(function(r){
+        if(r.ok)return true;
+        return r.json().catch(function(){return {}}).then(function(j){diag.push('DB-'+r.status+(j.error?' '+j.error:''));return false});
+      }).catch(function(){diag.push('DB-network');return false});
     var mailed=!FORM_ENDPOINT?Promise.resolve(false):fetch(FORM_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
       body:JSON.stringify({
         _subject:'[엡솜 겨울캠프] 상담 신청 - '+sn+' ('+ag+')',
@@ -1104,10 +1111,14 @@ var EARLY_BIRD_END = new Date('2026-11-30T23:59:59+09:00');
         '희망 캠프':camp, '관심 혜택':bens||'-', '문의 사항':data.message||'-',
         '접수 시각':new Date().toLocaleString('ko-KR',{timeZone:'Asia/Seoul'})
       })})
-      .then(function(r){return r.json().catch(function(){return {}}).then(function(j){return r.ok&&String(j.success)!=='false'})})
-      .catch(function(){return false});
+      .then(function(r){return r.json().catch(function(){return {}}).then(function(j){
+        var ok=r.ok&&String(j.success)!=='false';
+        if(!ok)diag.push('MAIL-'+(/activat/i.test(j.message||'')?'activation_needed':r.status+(j.message?' '+String(j.message).slice(0,60):'')));
+        return ok;
+      })})
+      .catch(function(){diag.push('MAIL-network');return false});
     Promise.all([saved,mailed])
-      .then(function(r){(r[0]||r[1])?done():fallback()})
+      .then(function(r){if(diag.length&&window.console)console.warn('consult delivery:',diag.join(' / '));(r[0]||r[1])?done():fallback()})
       .then(function(){btn.disabled=false;btn.innerHTML=btnHTML});
   });
   ['pn','ph','sn','ag'].forEach(function(id){document.getElementById(id).addEventListener('input',function(){this.closest('.f').classList.remove('invalid')})});
