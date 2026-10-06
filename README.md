@@ -1,4 +1,6 @@
-# 2027 Epsom College Malaysia 겨울 디스커버리 캠프
+# 2027 겨울방학 말레이시아 엡솜 국제학교 영어캠프
+
+Epsom College Malaysia - Winter English Camp 2027
 
 주최 꿈잡끼교육네트웍스(주) · 상담 신청 랜딩 페이지
 
