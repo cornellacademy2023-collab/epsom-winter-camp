@@ -92,6 +92,13 @@
   .direct b{color:var(--gold-lt);font-size:16px}
   .direct p{font-size:14px;color:rgba(255,255,255,.72);margin:4px 0 14px}
   .direct .btn{height:50px;width:100%}
+  .direct .btn-dl{margin-top:8px;background:transparent;border:1.5px solid rgba(232,207,152,.6);color:var(--gold-lt)}
+  .direct .btn-dl:hover{background:rgba(232,207,152,.1)}
+  .btn svg{flex:none}
+  .dl-row{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:30px}
+  .dl-row .btn{height:52px}
+  .btn-outline{border:1.5px solid var(--navy);color:var(--navy);background:#fff}
+  .btn-outline:hover{background:var(--navy);color:#fff}
   .nav.scrolled{background:rgba(7,18,45,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 1px 0 rgba(255,255,255,.06)}
 
   /* hero */
@@ -655,6 +662,10 @@
         <a class="btn reg js-register" href="https://knnedu.or.kr/" target="_blank" rel="noopener">Signature Camp 신청·결제 <svg><use href="#i-ext"/></svg></a>
       </article>
     </div>
+    <div class="dl-row rv">
+      <a class="btn btn-navy" href="application-form.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>참가신청서 다운로드 (PDF)</a>
+      <a class="btn btn-outline" href="application-form" target="_blank" rel="noopener">웹에서 보기·인쇄</a>
+    </div>
     <p class="fine rv">* 원화 금액은 1링깃 ≈ 350원 기준 예상 금액이며, 실제 금액은 납부 시점 환율에 따라 달라질 수 있습니다. 세부 시간표는 학교 공식 안내에 따릅니다.</p>
   </div>
 </section>
@@ -885,13 +896,15 @@
         <b>바로 등록하실 분은</b>
         <p>캠프 신청과 결제는 주최사 꿈잡끼교육네트웍스(주) 사이트에서 진행됩니다.</p>
         <a class="btn btn-gold js-register" href="https://knnedu.or.kr/" target="_blank" rel="noopener">캠프 신청·결제 바로가기 <svg><use href="#i-ext"/></svg></a>
+        <a class="btn btn-dl" href="application-form.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>참가신청서 다운로드 (PDF)</a>
       </div>
       <div class="contact">
-        <a href="tel:01048223528"><span class="ci"><svg><use href="#i-phone"/></svg></span><div><small>캠프 문의 담당 · 차지안 본부장</small><b>010-4822-3528</b></div></a>
+        <a href="tel:0517173975"><span class="ci"><svg><use href="#i-phone"/></svg></span><div><small>직통 문의 · 차지안 본부장</small><b>051-717-3975</b></div></a>
+        <a href="tel:01048223528"><span class="ci"><svg><use href="#i-phone"/></svg></span><div><small>휴대폰 · 차지안 본부장</small><b>010-4822-3528</b></div></a>
         <a href="sms:01048223528"><span class="ci"><svg><use href="#i-chat"/></svg></span><div><small>문자 상담</small><b>010-4822-3528</b></div></a>
         <a href="https://knnedu.or.kr/" target="_blank" rel="noopener"><span class="ci"><svg><use href="#i-globe"/></svg></span><div><small>주최사 홈페이지</small><b>꿈잡끼교육네트웍스(주)</b></div></a>
       </div>
-      <p class="agent">주최 : 꿈잡끼교육네트웍스(주)<br>캠프 문의 담당 : 차지안 본부장 (010-4822-3528)<br>학비는 학교 직납 또는 당사 대행 모두 가능합니다.</p>
+      <p class="agent">주최 : 꿈잡끼교육네트웍스(주)<br>캠프 문의 담당 : 차지안 본부장 (직통 051-717-3975 · 휴대폰 010-4822-3528)<br>학비는 학교 직납 또는 당사 대행 모두 가능합니다.</p>
     </div>
 
     <div class="form rv d1">
@@ -973,7 +986,8 @@
           <dt>캠프 장소</dt><dd>Epsom International School (Epsom College Malaysia)</dd>
           <dt>후원사</dt><dd>Ara 유학 (말레이시아)</dd>
         </dl>
-        <div class="contact-line">캠프 문의 담당 : 차지안 본부장 ☎ <a href="tel:01048223528">010-4822-3528</a></div>
+        <div class="contact-line">캠프 문의 담당 : 차지안 본부장 · 직통 ☎ <a href="tel:0517173975">051-717-3975</a> · 휴대폰 <a href="tel:01048223528">010-4822-3528</a></div>
+        <div class="contact-line"><a href="application-form.pdf" download style="text-decoration:underline">참가신청서 다운로드 (PDF)</a> · <a href="application-form" target="_blank" rel="noopener" style="text-decoration:underline">웹에서 보기·인쇄</a></div>
       </div>
     </div>
     <p class="disc">본 페이지의 원화 금액은 1링깃 ≈ 350원 기준 예상치이며, 환율 및 항공권 가격에 따라 변동될 수 있습니다. 캠프 세부 프로그램과 일정은 학교 사정에 따라 일부 변경될 수 있습니다. Epsom College Malaysia 명칭과 로고는 해당 학교에, 아라유학 로고는 (주)아라유학에 귀속됩니다.<br>© 2026 꿈잡끼교육네트웍스(주) All rights reserved.</p>
